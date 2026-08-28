@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G.IA Conecta | Gestão Inteligente de Atendimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0D10;
+    --bg-alt:#101318;
+    --surface:#161A20;
+    --surface-2:#1C2128;
+    --border:rgba(255,255,255,.08);
+    --border-strong:rgba(255,255,255,.14);
+    --text:#F3F0EA;
+    --text-dim:#9BA3AE;
+    --text-dimmer:#6C7580;
+    --teal:#5FD9BE;
+    --teal-dim:rgba(95,217,190,.14);
+    --amber:#E9B65B;
+    --amber-dim:rgba(233,182,91,.14);
+    --terracota:#D96853;
+    --terracota-dim:rgba(217,104,83,.16);
+    --radius:18px;
+    --maxw:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.01em;
+    font-weight:600;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--teal);
+    box-shadow:0 0 0 4px var(--teal-dim);
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,13,16,.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;max-width:var(--maxw);margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:center;gap:9px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:19px;letter-spacing:-0.01em;
+  }
+  .logo .dot{
+    width:9px;height:9px;border-radius:50%;
+    background:linear-gradient(135deg,var(--teal),var(--amber));
+    box-shadow:0 0 12px rgba(95,217,190,.5);
+  }
+  .logo span{color:var(--text-dim);font-weight:500;}
+  nav.links{display:flex;gap:34px;font-size:14.5px;color:var(--text-dim);}
+  nav.links a{transition:color .2s ease;}
+  nav.links a:hover{color:var(--text);}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:100px;
+    font-size:14.5px;font-weight:600;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--terracota);color:#FFFFFF;
+    box-shadow:0 0 0 rgba(217,104,83,0);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(217,104,83,.55);}
+  .btn-ghost{
+    background:transparent;color:var(--text);
+    border:1px solid var(--border-strong);
+  }
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+  .btn-sm{padding:9px 18px;font-size:13.5px;}
+
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 110px;
+    overflow:hidden;
+    border-bottom:1px solid var(--border);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 82% 8%, rgba(95,217,190,.14), transparent 45%),
+      radial-gradient(circle at 15% 85%, rgba(233,182,91,.10), transparent 40%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(38px,5vw,60px);
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--teal),var(--amber));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.sub{
+    font-size:17.5px;color:var(--text-dim);max-width:520px;margin-bottom:34px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px;}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;color:var(--text-dimmer);font-size:13.5px;}
+  .hero-meta li{display:flex;align-items:center;gap:8px;}
+  .hero-meta .pip{width:6px;height:6px;border-radius:50%;background:var(--text-dimmer);}
+
+  /* Signature visual: connection flow */
+  .flow{
+    position:relative;
+    aspect-ratio:1/1;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .flow svg{width:100%;height:100%;}
+  .flow-node{fill:var(--surface-2);stroke:var(--border-strong);stroke-width:1.4;}
+  .flow-dot{animation:pulseDot 2.6s ease-in-out infinite;}
+  .flow-dot:nth-child(2){animation-delay:.4s;}
+  .flow-dot:nth-child(3){animation-delay:.8s;}
+  .flow-path{stroke-dasharray:6 8;animation:dashMove 3.5s linear infinite;}
+  @keyframes dashMove{to{stroke-dashoffset:-140;}}
+  @keyframes pulseDot{
+    0%,100%{opacity:.35;r:3;}
+    50%{opacity:1;r:5;}
+  }
+
+  /* ---------- Sections generic ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,38px);margin-bottom:14px;}
+  .section-head p{color:var(--text-dim);font-size:16px;}
+  .alt{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+
+  /* ---------- Pain cards ---------- */
+  .pain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .pain-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:28px 22px;transition:border-color .25s ease, transform .25s ease;
+  }
+  .pain-card:hover{border-color:var(--border-strong);transform:translateY(-3px);}
+  .pain-card .num{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--amber);font-weight:600;margin-bottom:14px;}
+  .pain-card h3{font-size:17px;margin-bottom:10px;}
+  .pain-card p{font-size:14.5px;color:var(--text-dim);}
+
+  /* ---------- Positioning ---------- */
+  .position{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;}
+  .position h2{font-size:clamp(30px,3.6vw,42px);line-height:1.15;}
+  .position h2 .warm{color:var(--amber);}
+  .position h2 .cool{color:var(--teal);}
+  .position-copy p{color:var(--text-dim);font-size:16.5px;margin-bottom:18px;}
+  .position-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .position-tags span{
+    font-size:12.5px;padding:7px 14px;border-radius:100px;
+    border:1px solid var(--border-strong);color:var(--text-dim);
+  }
+
+  /* ---------- Services grid ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .service-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:30px 24px;transition:transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .service-card:hover{transform:translateY(-4px);border-color:var(--teal);background:var(--surface-2);}
+  .service-icon{
+    width:42px;height:42px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--teal-dim);color:var(--teal);margin-bottom:18px;
+  }
+  .service-card h3{font-size:16.5px;margin-bottom:9px;}
+  .service-card p{font-size:14px;color:var(--text-dim);}
+  .service-card:nth-child(3n+2) .service-icon{background:var(--amber-dim);color:var(--amber);}
+
+  /* ---------- Solutions (cards with price range) ---------- */
+  .sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .sol-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:28px 24px;display:flex;flex-direction:column;gap:14px;
+  }
+  .sol-card h3{font-size:17px;}
+  .sol-card p{font-size:14.5px;color:var(--text-dim);flex-grow:1;}
+  .sol-meta{
+    display:flex;justify-content:flex-end;align-items:center;
+    padding-top:14px;border-top:1px solid var(--border);
+  }
+  .sol-meta .btn{padding:8px 16px;font-size:13px;}
+  .sol-note{
+    margin-top:30px;font-size:13.5px;color:var(--text-dimmer);
+    border-left:2px solid var(--border-strong);padding-left:16px;
+  }
+
+  /* ---------- Use cases (aplicações práticas) ---------- */
+  .usecases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .case-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:32px 28px;
+  }
+  .case-tag{
+    display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.1em;color:var(--amber);margin-bottom:12px;
+  }
+  .case-card h3{font-size:20px;margin-bottom:14px;line-height:1.3;}
+  .case-list{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;}
+  .case-list li{font-size:14px;color:var(--text-dim);display:flex;gap:10px;align-items:flex-start;}
+  .case-list li::before{content:"—";color:var(--teal);flex-shrink:0;}
+  .before-after{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .ba{border-radius:12px;padding:16px;background:var(--surface-2);border:1px solid var(--border);}
+  .ba b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dimmer);margin-bottom:6px;}
+  .ba p{font-size:13.5px;color:var(--text-dim);}
+  .ba.after{background:var(--teal-dim);border-color:rgba(95,217,190,.3);}
+  .ba.after b{color:var(--teal);}
+
+  /* ---------- Demo interativa ---------- */
+  .demo-block{
+    display:grid;grid-template-columns:1fr .85fr;gap:56px;align-items:center;
+    background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:52px;
+  }
+  .demo-block h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:14px;}
+  .demo-block > div:first-child p{color:var(--text-dim);font-size:16px;margin-bottom:26px;}
+  .demo-box{
+    background:var(--bg-alt);border:1px solid var(--border-strong);border-radius:18px;padding:22px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .demo-bubble{
+    padding:13px 16px;border-radius:14px 14px 14px 4px;background:var(--surface-2);
+    font-size:14px;color:var(--text);max-width:88%;
+  }
+  .demo-bubble.user{
+    align-self:flex-end;border-radius:14px 14px 4px 14px;background:var(--teal-dim);color:var(--text);
+  }
+  .demo-bubble small{display:block;margin-top:6px;color:var(--text-dimmer);font-size:11.5px;}
+
+  /* ---------- Method timeline ---------- */
+  .timeline{
+    display:flex;overflow-x:auto;gap:0;padding-bottom:10px;
+    scrollbar-width:thin;
+  }
+  .tl-step{
+    min-width:170px;flex:1;position:relative;padding:0 18px 0 0;
+  }
+  .tl-step .tl-line{
+    height:2px;background:var(--border-strong);position:relative;margin-bottom:22px;
+  }
+  .tl-step:last-child .tl-line{background:transparent;}
+  .tl-step .tl-line::before{
+    content:"";position:absolute;left:0;top:-4px;
+    width:10px;height:10px;border-radius:50%;
+    background:var(--teal);box-shadow:0 0 0 5px var(--teal-dim);
+  }
+  .tl-step h4{font-size:14.5px;margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
+  .tl-step p{font-size:12.5px;color:var(--text-dimmer);}
+
+  /* ---------- Plans ---------- */
+  .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .plan-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:34px 28px;display:flex;flex-direction:column;
+  }
+  .plan-card.featured{
+    border-color:var(--teal);
+    background:linear-gradient(180deg, rgba(95,217,190,.06), var(--surface) 40%);
+    position:relative;
+  }
+  .plan-card.featured::after{
+    content:"MAIS ESCOLHIDO";
+    position:absolute;top:-12px;right:28px;
+    background:var(--teal);color:#08110E;
+    font-size:10.5px;font-weight:700;letter-spacing:.08em;
+    padding:5px 12px;border-radius:100px;
+  }
+  .plan-tag{font-size:12px;color:var(--text-dimmer);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
+  .plan-card h3{font-size:22px;margin-bottom:12px;}
+  .plan-card > p{font-size:14.5px;color:var(--text-dim);margin-bottom:22px;}
+  .plan-list{display:flex;flex-direction:column;gap:11px;margin-bottom:28px;flex-grow:1;}
+  .plan-list li{font-size:14px;color:var(--text-dim);display:flex;gap:10px;align-items:flex-start;}
+  .plan-list li::before{content:"—";color:var(--teal);flex-shrink:0;}
+
+  /* ---------- Differentiators ---------- */
+  .diff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .diff-item h4{font-size:15.5px;margin-bottom:9px;display:flex;align-items:center;gap:9px;}
+  .diff-item h4 .ic{color:var(--amber);font-family:'Space Grotesk',sans-serif;font-size:13px;}
+  .diff-item p{font-size:13.5px;color:var(--text-dim);}
+
+  /* ---------- Final CTA ---------- */
+  .cta-final{
+    text-align:center;
+    background:radial-gradient(ellipse at center, rgba(95,217,190,.09), transparent 70%);
+    border-top:1px solid var(--border);
+    padding:110px 0;
+  }
+  .cta-final h2{font-size:clamp(30px,4vw,46px);max-width:680px;margin:0 auto 18px;}
+  .cta-final p{color:var(--text-dim);font-size:16.5px;max-width:480px;margin:0 auto 34px;}
+  .cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border);padding:44px 0;}
+  .foot-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+  .foot-tag{font-size:13px;color:var(--text-dimmer);}
+  .foot-links{display:flex;gap:24px;font-size:13.5px;color:var(--text-dim);}
+  .foot-links a:hover{color:var(--teal);}
+
+  /* ---------- Mobile menu ---------- */
+  .mobile-menu{
+    display:none;position:fixed;inset:0;z-index:60;
+    background:var(--bg);padding:100px 28px 28px;
+  }
+  .mobile-menu.open{display:block;}
+  .mobile-menu a{display:block;font-size:22px;padding:16px 0;border-bottom:1px solid var(--border);font-family:'Space Grotesk',sans-serif;}
+  .mobile-menu .close{position:absolute;top:22px;right:28px;background:none;border:none;color:var(--text);font-size:26px;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .flow{max-width:340px;margin:0 auto;order:-1;}
+    .pain-grid,.services-grid{grid-template-columns:repeat(2,1fr);}
+    .sol-grid,.plans-grid,.diff-grid{grid-template-columns:repeat(2,1fr);}
+    .position{grid-template-columns:1fr;gap:36px;}
+    .usecases-grid{grid-template-columns:1fr;}
+    .demo-block{grid-template-columns:1fr;padding:36px 28px;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 20px;}
+    section{padding:72px 0;}
+    .pain-grid,.services-grid,.sol-grid,.plans-grid,.diff-grid,.usecases-grid{grid-template-columns:1fr;}
+    .before-after{grid-template-columns:1fr;}
+    .hero{padding:64px 0 72px;}
+    .hero-ctas .btn{width:100%;justify-content:center;}
+    .cta-buttons .btn{width:100%;justify-content:center;}
+    .foot-grid{flex-direction:column;align-items:flex-start;}
+    .demo-block{padding:28px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="logo"><span class="dot"></span>G.IA<span>&nbsp;Conecta</span></a>
+    <nav class="links">
+      <a href="#servicos">Serviços</a>
+      <a href="#solucoes">Soluções</a>
+      <a href="#aplicacoes">Aplicações</a>
+      <a href="#metodo">Como funciona</a>
+      <a href="#planos">Planos</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a class="btn btn-primary btn-sm" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close" id="menuClose" aria-label="Fechar menu">✕</button>
+  <a href="#servicos">Serviços</a>
+  <a href="#solucoes">Soluções</a>
+  <a href="#aplicacoes">Aplicações</a>
+  <a href="#metodo">Como funciona</a>
+  <a href="#planos">Planos</a>
+  <a href="https://wa.me/5519981392030" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Gestão Inteligente de Atendimento</div>
+        <h1>Cada contato, uma<br><span class="grad">experiência melhor.</span></h1>
+        <p class="sub">A G.IA Conecta une automação, inteligência artificial e dados para deixar o atendimento da sua empresa mais rápido, mais organizado e mais humano — sem perder o controle do que acontece em cada etapa.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn btn-ghost" href="#servicos">Ver soluções</a>
+        </div>
+      </div>
+
+      <div class="flow" aria-hidden="true">
+        <svg viewBox="0 0 320 320">
+          <line class="flow-path" x1="60" y1="80" x2="160" y2="160" stroke="#5FD9BE" stroke-width="1.5" opacity=".5"/>
+          <line class="flow-path" x1="160" y1="160" x2="260" y2="90" stroke="#E9B65B" stroke-width="1.5" opacity=".5"/>
+          <line class="flow-path" x1="160" y1="160" x2="90" y2="250" stroke="#5FD9BE" stroke-width="1.5" opacity=".5"/>
+          <line class="flow-path" x1="160" y1="160" x2="245" y2="235" stroke="#5FD9BE" stroke-width="1.5" opacity=".35"/>
+
+          <circle class="flow-node" cx="60" cy="80" r="30"/>
+          <circle class="flow-node" cx="260" cy="90" r="24"/>
+          <circle class="flow-node" cx="90" cy="250" r="26"/>
+          <circle class="flow-node" cx="245" cy="235" r="20"/>
+          <circle class="flow-node" cx="160" cy="160" r="42" fill="#171B21" stroke="#5FD9BE" stroke-width="1.6"/>
+
+          <circle class="flow-dot" cx="60" cy="80" r="4" fill="#5FD9BE"/>
+          <circle class="flow-dot" cx="260" cy="90" r="4" fill="#E9B65B"/>
+          <circle class="flow-dot" cx="90" cy="250" r="4" fill="#5FD9BE"/>
+          <circle cx="160" cy="160" r="5" fill="#5FD9BE"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN POINTS -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Sinais de que dá para automatizar</div>
+        <h2>Isso acontece na sua operação hoje?</h2>
+        <p>Antes de falar de tecnologia, a G.IA olha para o processo. Estes são os sinais mais comuns de que existe uma oportunidade real.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="num">01</div>
+          <h3>Atendimento que demora</h3>
+          <p>Mensagens acumuladas, clientes esperando resposta e atendimento parado fora do horário comercial.</p>
+        </div>
+        <div class="pain-card">
+          <div class="num">02</div>
+          <h3>Trabalho manual repetitivo</h3>
+          <p>Copiar e colar informação entre sistemas, preencher planilha à mão, lembrar de cada follow-up sozinho.</p>
+        </div>
+        <div class="pain-card">
+          <div class="num">03</div>
+          <h3>Dados espalhados</h3>
+          <p>Informação dividida entre planilhas, CRM e conversas soltas — sem uma visão única do negócio.</p>
+        </div>
+        <div class="pain-card">
+          <div class="num">04</div>
+          <h3>Falta de visibilidade</h3>
+          <p>Ninguém sabe ao certo onde estão os gargalos, os atrasos de SLA ou as oportunidades sendo perdidas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSICIONAMENTO -->
+  <section class="alt reveal">
+    <div class="wrap position">
+      <div>
+        <h2><span class="cool">Inteligência</span> por trás.<br><span class="warm">Pessoas</span> no centro.</h2>
+      </div>
+      <div class="position-copy">
+        <p>A G.IA Conecta não é uma empresa que só "faz chatbot". Atuamos na interseção entre <strong>atendimento, automação, inteligência artificial, dados, processos e experiência do cliente</strong> — construindo soluções que resolvem o problema real da sua operação, do primeiro contato ao pós-venda.</p>
+        <p>Cada automação nasce de um diagnóstico, não de uma ferramenta da moda. A tecnologia é o meio; o resultado para o seu negócio é o produto.</p>
+        <div class="position-tags">
+          <span>Atendimento</span>
+          <span>Automação</span>
+          <span>Inteligência Artificial</span>
+          <span>Dados</span>
+          <span>Processos</span>
+          <span>Experiência do Cliente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">O que a G.IA entrega</div>
+        <h2>Sete frentes, uma só operação inteligente</h2>
+        <p>Cada frente pode ser contratada isoladamente ou combinada em uma solução completa, de acordo com o momento da sua empresa.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">◐</div>
+          <h3>Atendimento</h3>
+          <p>Pré-atendimento, triagem, FAQ automatizado, atendimento 24/7 e direcionamento certeiro para um humano quando for preciso.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✦</div>
+          <h3>Inteligência Artificial</h3>
+          <p>Agentes de IA, classificação de mensagens, geração de respostas, análise de sentimento e apoio à tomada de decisão.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⇄</div>
+          <h3>Processos</h3>
+          <p>Eliminação de tarefas repetitivas, aprovações, notificações e integração entre as ferramentas que sua empresa já usa.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">▤</div>
+          <h3>Dados</h3>
+          <p>Coleta, organização e dashboards que transformam informação espalhada em decisão clara e rápida.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">◎</div>
+          <h3>Ticketeria</h3>
+          <p>Abertura, classificação, priorização e acompanhamento de chamados, com SLA sob controle.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">◈</div>
+          <h3>Monitoramento</h3>
+          <p>Acompanhamento de integrações, workflows e sistemas para identificar falhas antes que o cliente perceba.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">❖</div>
+          <h3>Experiência do Cliente</h3>
+          <p>Jornada mapeada, pontos de fricção identificados e cada etapa desenhada para reter e converter mais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÕES / EXEMPLOS -->
+  <section id="solucoes" class="alt reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Soluções mais pedidas</div>
+        <h2>Exemplos do que já entregamos</h2>
+        <p>Automações que costumam gerar retorno rápido — usadas como ponto de partida em boa parte dos nossos projetos.</p>
+      </div>
+      <div class="sol-grid">
+        <div class="sol-card">
+          <h3>Pré-atendimento automatizado</h3>
+          <p>Recebe o cliente, apresenta a empresa e direciona para o setor certo — mesmo fora do horário comercial.</p>
+          <div class="sol-meta"><a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a></div>
+        </div>
+        <div class="sol-card">
+          <h3>Agente de atendimento com IA</h3>
+          <p>Entende o que o cliente realmente quer dizer e responde com naturalidade, sem travar em scripts fixos.</p>
+          <div class="sol-meta"><a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a></div>
+        </div>
+        <div class="sol-card">
+          <h3>Pesquisa de satisfação automática</h3>
+          <p>Coleta feedback após cada atendimento e direciona clientes satisfeitos para avaliações públicas.</p>
+          <div class="sol-meta"><a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a></div>
+        </div>
+        <div class="sol-card">
+          <h3>Agendamento automatizado</h3>
+          <p>Confirma, reagenda e envia lembretes automaticamente, reduzindo faltas e cancelamentos.</p>
+          <div class="sol-meta"><a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a></div>
+        </div>
+        <div class="sol-card">
+          <h3>Captação e qualificação de leads</h3>
+          <p>Captura contatos automaticamente e entrega ao time comercial os leads já qualificados.</p>
+          <div class="sol-meta"><a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a></div>
+        </div>
+        <div class="sol-card">
+          <h3>Organização de dados e dashboards</h3>
+          <p>Conecta planilhas e sistemas, elimina retrabalho manual e mostra os números em tempo real.</p>
+          <div class="sol-meta"><a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a></div>
+        </div>
+      </div>
+      <p class="sol-note">O investimento é sempre calculado sob medida, conforme escopo, integrações e volume da sua operação. Toda automação inclui recorrência mensal para monitoramento, suporte e manutenção.</p>
+    </div>
+  </section>
+
+  <!-- APLICAÇÕES PRÁTICAS -->
+  <section id="aplicacoes" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Aplicações práticas</div>
+        <h2>Comece por uma dor clara e mensurável</h2>
+        <p>Alguns exemplos de como a G.IA Conecta transforma rotinas comuns em fluxos mais simples e previsíveis — sem perder o toque humano.</p>
+      </div>
+      <div class="usecases-grid">
+        <div class="case-card">
+          <span class="case-tag">Clínicas & serviços</span>
+          <h3>Contato que chega e não pode ser esquecido</h3>
+          <ul class="case-list">
+            <li>Triagem inicial no WhatsApp</li>
+            <li>Respostas a dúvidas frequentes</li>
+            <li>Coleta de informações básicas</li>
+            <li>Agendamento ou encaminhamento</li>
+            <li>Follow-up de quem ainda não decidiu</li>
+          </ul>
+          <div class="before-after">
+            <div class="ba"><b>Antes</b><p>Mensagens espalhadas e acompanhamento manual.</p></div>
+            <div class="ba after"><b>Depois</b><p>Contato registrado, organizado e encaminhado com contexto.</p></div>
+          </div>
+        </div>
+        <div class="case-card">
+          <span class="case-tag">Operação & gestão</span>
+          <h3>Informações que deixam de depender de conferência manual</h3>
+          <ul class="case-list">
+            <li>Coleta automática de dados</li>
+            <li>Integração entre ferramentas</li>
+            <li>Alertas de exceção</li>
+            <li>Dashboard de indicadores</li>
+            <li>Relatórios enviados automaticamente</li>
+          </ul>
+          <div class="before-after">
+            <div class="ba"><b>Antes</b><p>Copiar, colar, conferir e cobrar atualização.</p></div>
+            <div class="ba after"><b>Depois</b><p>Dados consolidados e sinalização automática do que precisa de ação.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTODO -->
+  <section id="metodo" class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Como trabalhamos</div>
+        <h2>Um método, não um workflow solto</h2>
+        <p>Uma automação só é considerada pronta quando funciona, é medida e pode ser mantida — não apenas quando o fluxo foi criado.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-step"><div class="tl-line"></div><h4>Diagnosticar</h4><p>Entender o processo real, antes de falar em ferramenta.</p></div>
+        <div class="tl-step"><div class="tl-line"></div><h4>Planejar</h4><p>Desenhar a arquitetura e escolher a tecnologia certa.</p></div>
+        <div class="tl-step"><div class="tl-line"></div><h4>Construir</h4><p>Configurar, integrar e desenvolver a solução.</p></div>
+        <div class="tl-step"><div class="tl-line"></div><h4>Testar</h4><p>Validar cenários reais, incluindo os de erro.</p></div>
+        <div class="tl-step"><div class="tl-line"></div><h4>Validar</h4><p>Confirmar que o resultado esperado realmente acontece.</p></div>
+        <div class="tl-step"><div class="tl-line"></div><h4>Documentar</h4><p>Deixar claro como tudo funciona, para você e sua equipe.</p></div>
+        <div class="tl-step"><div class="tl-line"></div><h4>Monitorar</h4><p>Acompanhar falhas, volume e performance no dia a dia.</p></div>
+        <div class="tl-step"><h4>Melhorar</h4><p>Evoluir a solução com base em dado real de uso.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO INTERATIVA -->
+  <section id="demo" class="reveal">
+    <div class="wrap">
+      <div class="demo-block">
+        <div>
+          <div class="eyebrow">Experimente na prática</div>
+          <h2>Converse com a própria G.IA</h2>
+          <p>Em vez de só explicar automação, usamos a nossa própria operação para demonstrar como um atendimento pode entender contexto, identificar uma necessidade e encaminhar uma oportunidade.</p>
+          <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Quero testar essa experiência</a>
+        </div>
+        <div class="demo-box">
+          <div class="demo-bubble">Qual parte da sua rotina você gostaria que acontecesse de forma mais automática?</div>
+          <div class="demo-bubble user">A equipe perde muito tempo atualizando planilhas e cobrando retorno.</div>
+          <div class="demo-bubble">Isso indica uma oportunidade de integração + alertas + acompanhamento. Posso te fazer duas perguntas rápidas para entender o cenário?<small>Diagnóstico inicial • oportunidade identificada</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="alt reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Planos</div>
+        <h2>Um ponto de partida para cada momento</h2>
+        <p>O escopo exato é sempre construído junto com você — estes são os três formatos mais comuns de contratação.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-tag">Opção A</div>
+          <h3>Essencial</h3>
+          <p>Para começar a automatizar com o menor escopo possível.</p>
+          <ul class="plan-list">
+            <li>FAQ e triagem automatizada</li>
+            <li>Direcionamento para o setor certo</li>
+            <li>Coleta básica de dados de contato</li>
+            <li>Suporte para ajustes pontuais</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-tag">Opção B</div>
+          <h3>Profissional</h3>
+          <p>O escopo mais recomendado para operações em crescimento.</p>
+          <ul class="plan-list">
+            <li>Múltiplas ferramentas integradas</li>
+            <li>IA aplicada ao atendimento</li>
+            <li>Follow-up e recuperação automática</li>
+            <li>Dashboard com indicadores principais</li>
+            <li>Monitoramento e suporte mensal</li>
+          </ul>
+          <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a>
+        </div>
+        <div class="plan-card">
+          <div class="plan-tag">Opção C</div>
+          <h3>Estratégica</h3>
+          <p>Solução completa para quem quer dados, IA e evolução contínua.</p>
+          <ul class="plan-list">
+            <li>Tudo do plano Profissional</li>
+            <li>Agentes de IA avançados</li>
+            <li>Dados consolidados e dashboards completos</li>
+            <li>Monitoramento ativo com alertas</li>
+            <li>Evolução contínua da solução</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Por que a G.IA</div>
+        <h2>O que muda quando a automação é bem-feita</h2>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-item">
+          <h4><span class="ic">01</span>Segurança em primeiro lugar</h4>
+          <p>Boas práticas de proteção de dados e atenção a informações sensíveis em cada projeto.</p>
+        </div>
+        <div class="diff-item">
+          <h4><span class="ic">02</span>Suporte contínuo</h4>
+          <p>O trabalho não termina na entrega — acompanhamento, ajustes e manutenção fazem parte do serviço.</p>
+        </div>
+        <div class="diff-item">
+          <h4><span class="ic">03</span>Preço com critério</h4>
+          <p>Precificação baseada no valor entregue e na complexidade real — não só em horas trabalhadas.</p>
+        </div>
+        <div class="diff-item">
+          <h4><span class="ic">04</span>Tecnologia a serviço do resultado</h4>
+          <p>A ferramenta muda conforme o problema. O compromisso com o resultado do seu negócio, não.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final reveal">
+    <div class="wrap">
+      <h2>Vamos conversar sobre o atendimento da sua empresa?</h2>
+      <p>Conte o que está acontecendo hoje — a gente ajuda a enxergar onde a automação faz sentido.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Chamar no WhatsApp — (19) 98139-2030</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/gia.conecta/" target="_blank" rel="noopener">Ver Instagram @gia.conecta</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a href="#top" class="logo"><span class="dot"></span>G.IA<span>&nbsp;Conecta</span></a>
+      <p class="foot-tag" style="margin-top:8px;">Inteligência por trás. Pessoas no centro.</p>
+    </div>
+    <div class="foot-links">
+      <a href="https://wa.me/5519981392030" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.instagram.com/gia.conecta/" target="_blank" rel="noopener">Instagram</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#planos">Planos</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const menuClose = document.getElementById('menuClose');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+  menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Scroll reveal
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (prefersReduced) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
