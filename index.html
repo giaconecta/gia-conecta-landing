@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>G.IA Conecta | Gestão Inteligente de Atendimento</title>
+<title>G.IA Conecta | Automação, IA e processos para PMEs</title>
+<meta name="description" content="Automatize vendas, atendimento, follow-ups, tarefas e dados. A G.IA Conecta cria soluções sob medida para sua empresa ganhar tempo e não perder oportunidades.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -157,23 +158,26 @@
   .hero-meta li{display:flex;align-items:center;gap:8px;}
   .hero-meta .pip{width:6px;height:6px;border-radius:50%;background:var(--text-dimmer);}
 
-  /* Signature visual: connection flow */
-  .flow{
-    position:relative;
-    aspect-ratio:1/1;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .flow svg{width:100%;height:100%;}
-  .flow-node{fill:var(--surface-2);stroke:var(--border-strong);stroke-width:1.4;}
-  .flow-dot{animation:pulseDot 2.6s ease-in-out infinite;}
-  .flow-dot:nth-child(2){animation-delay:.4s;}
-  .flow-dot:nth-child(3){animation-delay:.8s;}
-  .flow-path{stroke-dasharray:6 8;animation:dashMove 3.5s linear infinite;}
-  @keyframes dashMove{to{stroke-dashoffset:-140;}}
-  @keyframes pulseDot{
-    0%,100%{opacity:.35;r:3;}
-    50%{opacity:1;r:5;}
-  }
+  .hero-proof{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;color:var(--text-dimmer);font-size:12.5px;}
+  .hero-proof span{display:flex;align-items:center;gap:7px;}
+  .hero-proof span::before{content:"✓";color:var(--teal);font-weight:700;}
+  .simulator{background:var(--surface);border:1px solid var(--border-strong);border-radius:24px;padding:20px;box-shadow:0 28px 70px rgba(0,0,0,.28);}
+  .sim-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;}
+  .sim-head strong{font-family:'Space Grotesk',sans-serif;font-size:14px;}
+  .sim-live{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);display:flex;align-items:center;gap:7px;}
+  .sim-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--teal-dim);}
+  .sim-tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:5px;margin-bottom:14px;scrollbar-width:none;}
+  .sim-tab{border:1px solid var(--border);background:var(--bg-alt);color:var(--text-dim);border-radius:100px;padding:7px 11px;font:600 11px 'Plus Jakarta Sans',sans-serif;white-space:nowrap;cursor:pointer;}
+  .sim-tab.active{color:#08110E;background:var(--teal);border-color:var(--teal);}
+  .sim-stage{background:#0d1117;border:1px solid var(--border);border-radius:16px;padding:18px;min-height:330px;display:flex;flex-direction:column;}
+  .sim-context{display:flex;justify-content:space-between;gap:12px;padding-bottom:13px;margin-bottom:13px;border-bottom:1px solid var(--border);}
+  .sim-context b{font-size:12.5px;}.sim-context span{font-size:11px;color:var(--text-dimmer);}
+  .sim-messages{display:flex;flex-direction:column;gap:10px;flex-grow:1;}
+  .sim-msg{max-width:88%;padding:10px 12px;border-radius:12px 12px 12px 4px;background:var(--surface-2);font-size:12.5px;animation:msgIn .35s ease both;}
+  .sim-msg.client{align-self:flex-end;background:var(--teal-dim);border-radius:12px 12px 4px 12px;animation-delay:.15s;}
+  .sim-msg.ai{border:1px solid rgba(95,217,190,.18);animation-delay:.3s;}
+  .sim-result{margin-top:14px;padding:11px 12px;border-radius:11px;background:var(--amber-dim);color:var(--amber);font-size:11.5px;font-weight:600;animation:msgIn .35s .45s ease both;}
+  @keyframes msgIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 
   /* ---------- Sections generic ---------- */
   section{padding:96px 0;}
@@ -363,7 +367,7 @@
     nav.links{display:none;}
     .menu-toggle{display:block;}
     .hero-grid{grid-template-columns:1fr;}
-    .flow{max-width:340px;margin:0 auto;order:-1;}
+    .simulator{max-width:620px;width:100%;}
     .pain-grid,.services-grid{grid-template-columns:repeat(2,1fr);}
     .sol-grid,.plans-grid,.diff-grid{grid-template-columns:repeat(2,1fr);}
     .position{grid-template-columns:1fr;gap:36px;}
@@ -380,6 +384,7 @@
     .cta-buttons .btn{width:100%;justify-content:center;}
     .foot-grid{flex-direction:column;align-items:flex-start;}
     .demo-block{padding:28px 20px;}
+    .sim-stage{min-height:350px;}
   }
 </style>
 </head>
@@ -418,33 +423,25 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">Gestão Inteligente de Atendimento</div>
-        <h1>Cada contato, uma<br><span class="grad">experiência melhor.</span></h1>
-        <p class="sub">A G.IA Conecta une automação, inteligência artificial e dados para deixar o atendimento da sua empresa mais rápido, mais organizado e mais humano — sem perder o controle do que acontece em cada etapa.</p>
+        <div class="eyebrow">Automação e IA para pequenas e médias empresas</div>
+        <h1>Quanto sua empresa perde em tarefas que <span class="grad">poderiam acontecer sozinhas?</span></h1>
+        <p class="sub">Leads sem retorno, orçamentos esquecidos, agendas vazias, dados espalhados e horas gastas em trabalho manual. A G.IA conecta seus processos para sua empresa ganhar tempo, vender mais e não deixar oportunidades para trás.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          <a class="btn btn-ghost" href="#servicos">Ver soluções</a>
+          <a class="btn btn-primary" href="https://wa.me/5519981392030?text=Oi%2C%20quero%20identificar%20o%20que%20posso%20automatizar%20na%20minha%20empresa." target="_blank" rel="noopener">Descobrir o que posso automatizar</a>
+          <a class="btn btn-ghost" href="#aplicacoes">Ver exemplos reais</a>
         </div>
+        <div class="hero-proof"><span>Solução sob medida</span><span>Integração com suas ferramentas</span><span>Atendimento humano quando necessário</span></div>
       </div>
 
-      <div class="flow" aria-hidden="true">
-        <svg viewBox="0 0 320 320">
-          <line class="flow-path" x1="60" y1="80" x2="160" y2="160" stroke="#5FD9BE" stroke-width="1.5" opacity=".5"/>
-          <line class="flow-path" x1="160" y1="160" x2="260" y2="90" stroke="#E9B65B" stroke-width="1.5" opacity=".5"/>
-          <line class="flow-path" x1="160" y1="160" x2="90" y2="250" stroke="#5FD9BE" stroke-width="1.5" opacity=".5"/>
-          <line class="flow-path" x1="160" y1="160" x2="245" y2="235" stroke="#5FD9BE" stroke-width="1.5" opacity=".35"/>
-
-          <circle class="flow-node" cx="60" cy="80" r="30"/>
-          <circle class="flow-node" cx="260" cy="90" r="24"/>
-          <circle class="flow-node" cx="90" cy="250" r="26"/>
-          <circle class="flow-node" cx="245" cy="235" r="20"/>
-          <circle class="flow-node" cx="160" cy="160" r="42" fill="#171B21" stroke="#5FD9BE" stroke-width="1.6"/>
-
-          <circle class="flow-dot" cx="60" cy="80" r="4" fill="#5FD9BE"/>
-          <circle class="flow-dot" cx="260" cy="90" r="4" fill="#E9B65B"/>
-          <circle class="flow-dot" cx="90" cy="250" r="4" fill="#5FD9BE"/>
-          <circle cx="160" cy="160" r="5" fill="#5FD9BE"/>
-        </svg>
+      <div class="simulator" aria-label="Simulação de automações em diferentes negócios">
+        <div class="sim-head"><strong>Veja a automação em ação</strong><span class="sim-live">Simulação</span></div>
+        <div class="sim-tabs" role="tablist" aria-label="Escolha um cenário">
+          <button class="sim-tab active" data-scene="clinica" role="tab" aria-selected="true">Clínica</button>
+          <button class="sim-tab" data-scene="imobiliaria" role="tab" aria-selected="false">Imobiliária</button>
+          <button class="sim-tab" data-scene="orcamento" role="tab" aria-selected="false">Orçamento</button>
+          <button class="sim-tab" data-scene="processo" role="tab" aria-selected="false">Processos</button>
+        </div>
+        <div class="sim-stage" id="simStage" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -760,8 +757,8 @@
   <!-- CTA FINAL -->
   <section class="cta-final reveal">
     <div class="wrap">
-      <h2>Vamos conversar sobre o atendimento da sua empresa?</h2>
-      <p>Conte o que está acontecendo hoje — a gente ajuda a enxergar onde a automação faz sentido.</p>
+      <h2>Qual parte da sua empresa ainda depende de alguém lembrar de fazer?</h2>
+      <p>Conte onde existe demora, retrabalho ou oportunidade perdida. A gente ajuda a enxergar onde a automação faz sentido.</p>
       <div class="cta-buttons">
         <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Chamar no WhatsApp — (19) 98139-2030</a>
         <a class="btn btn-ghost" href="https://www.instagram.com/gia.conecta/" target="_blank" rel="noopener">Ver Instagram @gia.conecta</a>
@@ -787,6 +784,69 @@
 </footer>
 
 <script>
+  // Cenários do simulador do primeiro bloco
+  const simScenes = {
+    clinica: {
+      title: 'Clínica de estética', status: 'Domingo • 21:47',
+      messages: [
+        ['client', 'Oi! Tem horário para limpeza de pele esta semana?'],
+        ['ai', 'Tenho sim 😊 Quinta às 18h ou sábado às 10h. Qual funciona melhor para você?'],
+        ['client', 'Sábado às 10h.'],
+        ['ai', 'Perfeito! Horário reservado. Vou enviar a confirmação e lembrar você antes do atendimento.']
+      ], result: 'Agendamento concluído fora do horário comercial'
+    },
+    imobiliaria: {
+      title: 'SDR imobiliário', status: 'Lead recebido agora',
+      messages: [
+        ['client', 'Vi o apartamento de 2 quartos. Ainda está disponível?'],
+        ['ai', 'Está sim. Para indicar as melhores opções: você pretende comprar ou alugar e qual região prefere?'],
+        ['client', 'Comprar, até R$ 550 mil, perto do Taquaral.'],
+        ['ai', 'Encontrei 3 opções compatíveis. Posso enviar os detalhes e agendar uma visita?']
+      ], result: 'Lead qualificado e entregue ao corretor com contexto'
+    },
+    orcamento: {
+      title: 'Buffet e eventos', status: 'Follow-up automático',
+      messages: [
+        ['ai', 'Oi, Camila! Vi que você recebeu nosso orçamento há 3 dias. Ficou alguma dúvida?'],
+        ['client', 'Gostei, mas preciso ajustar para 60 convidados.'],
+        ['ai', 'Sem problema. Posso recalcular agora ou encaminhar você para nossa equipe. O que prefere?'],
+        ['client', 'Pode recalcular por aqui.']
+      ], result: 'Oportunidade recuperada sem cobrança manual'
+    },
+    processo: {
+      title: 'Rotina administrativa', status: 'Fluxo em execução',
+      messages: [
+        ['ai', '12 novos pedidos foram recebidos e cadastrados no sistema.'],
+        ['ai', '2 estão sem comprovante. Os clientes já receberam uma solicitação automática.'],
+        ['ai', 'O painel foi atualizado e o resumo do dia enviado à gestão.']
+      ], result: 'Menos copiar e colar. Só as exceções exigem ação humana'
+    }
+  };
+  const simStage = document.getElementById('simStage');
+  const simTabs = [...document.querySelectorAll('.sim-tab')];
+  let currentScene = 0;
+  let simTimer;
+
+  function renderScene(key) {
+    const scene = simScenes[key];
+    simStage.innerHTML = `<div class="sim-context"><b>${scene.title}</b><span>${scene.status}</span></div><div class="sim-messages">${scene.messages.map(([type, copy]) => `<div class="sim-msg ${type}">${copy}</div>`).join('')}</div><div class="sim-result">✓ ${scene.result}</div>`;
+    simTabs.forEach((tab, index) => {
+      const active = tab.dataset.scene === key;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      if (active) currentScene = index;
+    });
+  }
+  function startSimulator() {
+    if (prefersReduced) return;
+    clearInterval(simTimer);
+    simTimer = setInterval(() => {
+      currentScene = (currentScene + 1) % simTabs.length;
+      renderScene(simTabs[currentScene].dataset.scene);
+    }, 6500);
+  }
+  simTabs.forEach(tab => tab.addEventListener('click', () => { renderScene(tab.dataset.scene); startSimulator(); }));
+
   // Mobile menu
   const menuToggle = document.getElementById('menuToggle');
   const menuClose = document.getElementById('menuClose');
@@ -797,6 +857,8 @@
 
   // Scroll reveal
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  renderScene('clinica');
+  startSimulator();
   const revealEls = document.querySelectorAll('.reveal');
   if (prefersReduced) {
     revealEls.forEach(el => el.classList.add('in'));
