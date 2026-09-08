@@ -398,7 +398,6 @@
       <a href="#solucoes">Soluções</a>
       <a href="#aplicacoes">Aplicações</a>
       <a href="#metodo">Como funciona</a>
-      <a href="#planos">Planos</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;">
       <a class="btn btn-primary btn-sm" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Falar no WhatsApp</a>
@@ -413,7 +412,6 @@
   <a href="#solucoes">Soluções</a>
   <a href="#aplicacoes">Aplicações</a>
   <a href="#metodo">Como funciona</a>
-  <a href="#planos">Planos</a>
   <a href="https://wa.me/5519981392030" target="_blank" rel="noopener">WhatsApp</a>
 </div>
 
@@ -439,7 +437,7 @@
           <button class="sim-tab active" data-scene="clinica" role="tab" aria-selected="true">Clínica</button>
           <button class="sim-tab" data-scene="imobiliaria" role="tab" aria-selected="false">Imobiliária</button>
           <button class="sim-tab" data-scene="orcamento" role="tab" aria-selected="false">Orçamento</button>
-          <button class="sim-tab" data-scene="processo" role="tab" aria-selected="false">Processos</button>
+          <button class="sim-tab" data-scene="suporte" role="tab" aria-selected="false">Suporte</button>
         </div>
         <div class="sim-stage" id="simStage" aria-live="polite"></div>
       </div>
@@ -675,57 +673,6 @@
     </div>
   </section>
 
-  <!-- PLANOS -->
-  <section id="planos" class="alt reveal">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">Planos</div>
-        <h2>Um ponto de partida para cada momento</h2>
-        <p>O escopo exato é sempre construído junto com você — estes são os três formatos mais comuns de contratação.</p>
-      </div>
-      <div class="plans-grid">
-        <div class="plan-card">
-          <div class="plan-tag">Opção A</div>
-          <h3>Essencial</h3>
-          <p>Para começar a automatizar com o menor escopo possível.</p>
-          <ul class="plan-list">
-            <li>FAQ e triagem automatizada</li>
-            <li>Direcionamento para o setor certo</li>
-            <li>Coleta básica de dados de contato</li>
-            <li>Suporte para ajustes pontuais</li>
-          </ul>
-          <a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a>
-        </div>
-        <div class="plan-card featured">
-          <div class="plan-tag">Opção B</div>
-          <h3>Profissional</h3>
-          <p>O escopo mais recomendado para operações em crescimento.</p>
-          <ul class="plan-list">
-            <li>Múltiplas ferramentas integradas</li>
-            <li>IA aplicada ao atendimento</li>
-            <li>Follow-up e recuperação automática</li>
-            <li>Dashboard com indicadores principais</li>
-            <li>Monitoramento e suporte mensal</li>
-          </ul>
-          <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a>
-        </div>
-        <div class="plan-card">
-          <div class="plan-tag">Opção C</div>
-          <h3>Estratégica</h3>
-          <p>Solução completa para quem quer dados, IA e evolução contínua.</p>
-          <ul class="plan-list">
-            <li>Tudo do plano Profissional</li>
-            <li>Agentes de IA avançados</li>
-            <li>Dados consolidados e dashboards completos</li>
-            <li>Monitoramento ativo com alertas</li>
-            <li>Evolução contínua da solução</li>
-          </ul>
-          <a class="btn btn-ghost" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Solicitar proposta</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- DIFERENCIAIS -->
   <section class="reveal">
     <div class="wrap">
@@ -778,7 +725,6 @@
       <a href="https://wa.me/5519981392030" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://www.instagram.com/gia.conecta/" target="_blank" rel="noopener">Instagram</a>
       <a href="#servicos">Serviços</a>
-      <a href="#planos">Planos</a>
     </div>
   </div>
 </footer>
@@ -813,13 +759,14 @@
         ['client', 'Pode recalcular por aqui.']
       ], result: 'Oportunidade recuperada sem cobrança manual'
     },
-    processo: {
-      title: 'Rotina administrativa', status: 'Fluxo em execução',
+    suporte: {
+      title: 'Central de suporte', status: 'Fora do horário • 22:18',
       messages: [
-        ['ai', '12 novos pedidos foram recebidos e cadastrados no sistema.'],
-        ['ai', '2 estão sem comprovante. Os clientes já receberam uma solicitação automática.'],
-        ['ai', 'O painel foi atualizado e o resumo do dia enviado à gestão.']
-      ], result: 'Menos copiar e colar. Só as exceções exigem ação humana'
+        ['client', 'Não consigo entrar na minha conta. Preciso acessar um documento agora.'],
+        ['ai', 'Posso ajudar. Encontrei uma orientação na nossa central: primeiro, vamos redefinir sua senha com segurança.'],
+        ['ai', 'Enviei um código de verificação para o contato cadastrado. Digite o código para continuar.'],
+        ['client', 'Pronto, consegui criar uma nova senha e acessar. Obrigado!']
+      ], result: 'Acesso recuperado às 22h18, sem esperar o próximo dia útil'
     }
   };
   const simStage = document.getElementById('simStage');
