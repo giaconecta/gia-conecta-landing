@@ -6,21 +6,9 @@
 <title>G.IA Conecta | Automação, IA e processos para PMEs</title>
 <meta name="description" content="Automatize vendas, atendimento, follow-ups, tarefas e dados. A G.IA Conecta cria soluções sob medida para sua empresa ganhar tempo e não perder oportunidades.">
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    analytics_storage: 'denied',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    wait_for_update: 500
-  });
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DJQPBYTQ88"></script>
-<script>
-  gtag('js', new Date());
-  gtag('config', 'G-DJQPBYTQ88', { anonymize_ip: true });
-</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -369,19 +357,6 @@
   .foot-links{display:flex;gap:24px;font-size:13.5px;color:var(--text-dim);}
   .foot-links a:hover{color:var(--teal);}
 
-  .privacy-banner{
-    position:fixed;left:18px;bottom:18px;z-index:100;
-    width:min(560px,calc(100vw - 36px));padding:11px 12px;
-    background:rgba(22,26,32,.96);border:1px solid var(--border);border-radius:8px;
-    box-shadow:0 10px 28px rgba(0,0,0,.3);
-    display:none;align-items:center;justify-content:space-between;gap:18px;
-  }
-  .privacy-banner.open{display:flex;}
-  .privacy-copy{font-size:12.5px;line-height:1.45;color:var(--text-dim);}
-  .privacy-copy a{color:var(--teal);text-decoration:underline;}
-  .privacy-actions{display:flex;gap:8px;flex-shrink:0;}
-  .privacy-actions button{border:0;cursor:pointer;padding:7px 11px;font-size:12px;}
-
   /* ---------- Mobile menu ---------- */
   .mobile-menu{
     display:none;position:fixed;inset:0;z-index:60;
@@ -414,9 +389,6 @@
     .foot-grid{flex-direction:column;align-items:flex-start;}
     .demo-block{padding:28px 20px;}
     .sim-stage{min-height:350px;}
-    .privacy-banner{align-items:flex-start;flex-direction:column;gap:9px;bottom:10px;left:10px;width:calc(100vw - 20px);}
-    .privacy-actions{width:100%;justify-content:flex-end;}
-    .privacy-actions .btn{justify-content:center;white-space:normal;text-align:center;}
   }
 </style>
 </head>
@@ -762,47 +734,7 @@
   </div>
 </footer>
 
-<aside class="privacy-banner" id="privacyBanner" aria-label="Preferências de privacidade" role="dialog" aria-live="polite">
-  <div class="privacy-copy">
-    Usamos uma medição básica, sem publicidade, para melhorar o site. Você escolhe se quer participar. <a href="privacidade.html">Detalhes</a>.
-  </div>
-  <div class="privacy-actions">
-    <button class="btn btn-ghost btn-sm" id="declineAnalytics" type="button">Agora não</button>
-    <button class="btn btn-primary btn-sm" id="acceptAnalytics" type="button">Permitir</button>
-  </div>
-</aside>
-
 <script>
-  const analyticsChoice = localStorage.getItem('giaAnalyticsConsent');
-  const privacyBanner = document.getElementById('privacyBanner');
-
-  function updateAnalyticsConsent(choice) {
-    localStorage.setItem('giaAnalyticsConsent', choice);
-    gtag('consent', 'update', {
-      analytics_storage: choice === 'granted' ? 'granted' : 'denied'
-    });
-    privacyBanner.classList.remove('open');
-  }
-
-  if (analyticsChoice === 'granted') {
-    gtag('consent', 'update', { analytics_storage: 'granted' });
-  } else if (analyticsChoice !== 'denied') {
-    privacyBanner.classList.add('open');
-  }
-
-  document.getElementById('acceptAnalytics').addEventListener('click', () => updateAnalyticsConsent('granted'));
-  document.getElementById('declineAnalytics').addEventListener('click', () => updateAnalyticsConsent('denied'));
-
-  document.addEventListener('click', event => {
-    const link = event.target.closest('a[href*="wa.me"]');
-    if (!link || localStorage.getItem('giaAnalyticsConsent') !== 'granted') return;
-    gtag('event', 'whatsapp_click', {
-      link_url: link.href,
-      link_text: link.textContent.trim(),
-      page_location: window.location.href
-    });
-  });
-
   // Cenários do simulador do primeiro bloco
   const simScenes = {
     clinica: {
