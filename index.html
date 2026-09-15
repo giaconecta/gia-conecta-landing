@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>G.IA Conecta | Automação, IA e processos para PMEs</title>
-<meta name="description" content="Automatize vendas, atendimento, follow-ups, tarefas e dados. A G.IA Conecta cria soluções sob medida para sua empresa ganhar tempo e não perder oportunidades.">
+<title>G.IA Conecta | Automação e IA para autônomos, MEIs e empresas</title>
+<meta name="description" content="Automação e inteligência artificial para profissionais autônomos, MEIs e empresas. A G.IA Conecta simplifica atendimento, tarefas, dados e processos.">
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -126,6 +126,7 @@
   .btn-sm{padding:9px 18px;font-size:13.5px;}
 
   .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+  .future-only{display:none!important;}
 
   /* ---------- Hero ---------- */
   .hero{
@@ -185,6 +186,7 @@
 
   /* ---------- Sections generic ---------- */
   section{padding:96px 0;}
+  section[id]{scroll-margin-top:96px;}
   .section-head{max-width:640px;margin-bottom:56px;}
   .section-head h2{font-size:clamp(28px,3.4vw,38px);margin-bottom:14px;}
   .section-head p{color:var(--text-dim);font-size:16px;}
@@ -200,6 +202,23 @@
   .pain-card .num{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--amber);font-weight:600;margin-bottom:14px;}
   .pain-card h3{font-size:17px;margin-bottom:10px;}
   .pain-card p{font-size:14.5px;color:var(--text-dim);}
+
+  /* ---------- Audience selector ---------- */
+  .audience-shell{background:linear-gradient(145deg,var(--surface),rgba(28,33,40,.82));border:1px solid var(--border-strong);border-radius:24px;padding:30px;}
+  .audience-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+  .audience-tab{min-height:82px;padding:15px 16px;border-radius:15px;border:1px solid var(--border);background:var(--bg-alt);color:var(--text-dim);font:600 14px 'Plus Jakarta Sans',sans-serif;text-align:left;cursor:pointer;transition:border-color .2s ease,background .2s ease,color .2s ease,transform .2s ease;}
+  .audience-tab:hover{border-color:var(--teal);transform:translateY(-2px);}
+  .audience-tab.active{background:var(--teal-dim);border-color:var(--teal);color:var(--text);}
+  .audience-tab small{display:block;margin-top:5px;color:var(--text-dimmer);font-size:11.5px;font-weight:500;}
+  .audience-tab.active small{color:var(--text-dim);}
+  .audience-panel{display:none;grid-template-columns:1.05fr .95fr;gap:34px;align-items:start;}
+  .audience-panel.active{display:grid;}
+  .audience-copy h3{font-size:25px;margin-bottom:12px;}
+  .audience-copy p{color:var(--text-dim);font-size:15.5px;margin-bottom:20px;}
+  .audience-list{display:grid;gap:10px;margin-bottom:24px;}
+  .audience-list li{display:flex;gap:9px;color:var(--text-dim);font-size:14px;}
+  .audience-list li::before{content:"✓";color:var(--teal);font-weight:700;}
+  .audience-note{border-left:2px solid var(--amber);padding:12px 15px;background:var(--amber-dim);border-radius:0 12px 12px 0;color:var(--text-dim);font-size:13.5px;}
 
   /* ---------- Positioning ---------- */
   .position{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;}
@@ -377,6 +396,7 @@
     .position{grid-template-columns:1fr;gap:36px;}
     .usecases-grid{grid-template-columns:1fr;}
     .demo-block{grid-template-columns:1fr;padding:36px 28px;}
+    .audience-panel{grid-template-columns:1fr;}
   }
   @media (max-width:600px){
     .wrap{padding:0 20px;}
@@ -389,6 +409,11 @@
     .foot-grid{flex-direction:column;align-items:flex-start;}
     .demo-block{padding:28px 20px;}
     .sim-stage{min-height:350px;}
+    .nav{padding:16px 20px;}
+    .nav .header-whatsapp{display:none;}
+    .audience-shell{padding:20px;}
+    .audience-tabs{grid-template-columns:1fr;}
+    .audience-tab{min-height:auto;}
   }
 </style>
 </head>
@@ -398,13 +423,14 @@
   <div class="nav">
     <a href="#top" class="logo"><span class="dot"></span>G.IA<span>&nbsp;Conecta</span></a>
     <nav class="links">
+      <a href="#para-quem">Para quem</a>
       <a href="#servicos">Serviços</a>
-      <a href="#solucoes">Soluções</a>
+      <a class="future-only" href="#solucoes">Soluções</a>
       <a href="#aplicacoes">Aplicações</a>
       <a href="#metodo">Como funciona</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;">
-      <a class="btn btn-primary btn-sm" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-primary btn-sm header-whatsapp" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Falar no WhatsApp</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
     </div>
   </div>
@@ -412,8 +438,9 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <button class="close" id="menuClose" aria-label="Fechar menu">✕</button>
+  <a href="#para-quem">Para quem</a>
   <a href="#servicos">Serviços</a>
-  <a href="#solucoes">Soluções</a>
+  <a class="future-only" href="#solucoes">Soluções</a>
   <a href="#aplicacoes">Aplicações</a>
   <a href="#metodo">Como funciona</a>
   <a href="https://wa.me/5519981392030" target="_blank" rel="noopener">WhatsApp</a>
@@ -425,11 +452,11 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">Automação e IA para pequenas e médias empresas</div>
-        <h1>Quanto sua empresa perde em tarefas que <span class="grad">poderiam acontecer sozinhas?</span></h1>
-        <p class="sub">Leads sem retorno, orçamentos esquecidos, agendas vazias, dados espalhados e horas gastas em trabalho manual. A G.IA conecta seus processos para sua empresa ganhar tempo, vender mais e não deixar oportunidades para trás.</p>
+        <div class="eyebrow">Automação e IA para autônomos, MEIs e empresas</div>
+        <h1>Qual tarefa repetitiva está <span class="grad">consumindo o seu tempo?</span></h1>
+        <p class="sub">Atendimento demorado, mensagens sem retorno, agendas desorganizadas, dados espalhados e tarefas que dependem de alguém lembrar. A G.IA Conecta entende o problema e cria uma solução proporcional à sua rotina ou ao seu negócio.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="https://wa.me/5519981392030?text=Oi%2C%20quero%20identificar%20o%20que%20posso%20automatizar%20na%20minha%20empresa." target="_blank" rel="noopener">Descobrir o que posso automatizar</a>
+          <a class="btn btn-primary" href="https://wa.me/5519981392030?text=Oi%2C%20quero%20entender%20se%20uma%20tarefa%20repetitiva%20da%20minha%20rotina%20ou%20do%20meu%20neg%C3%B3cio%20pode%20ser%20automatizada." target="_blank" rel="noopener">Descobrir o que posso simplificar</a>
           <a class="btn btn-ghost" href="#aplicacoes">Ver exemplos reais</a>
         </div>
         <div class="hero-proof"><span>Solução sob medida</span><span>Integração com suas ferramentas</span><span>Atendimento humano quando necessário</span></div>
@@ -448,12 +475,67 @@
     </div>
   </section>
 
+  <!-- AUDIENCES -->
+  <section id="para-quem" class="alt reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Para cada realidade</div>
+        <h2>Como a G.IA pode ajudar você?</h2>
+        <p>Escolha a situação que mais se aproxima da sua. Os exemplos e o nível de detalhe mudam, mas o primeiro passo é sempre entender o problema.</p>
+      </div>
+
+      <div class="audience-shell">
+        <div class="audience-tabs" role="tablist" aria-label="Escolha o seu perfil">
+          <button class="audience-tab" id="tab-autonomo" data-audience="autonomo" role="tab" aria-selected="false" aria-controls="panel-autonomo">Trabalho por conta própria<small>Profissionais autônomos e liberais</small></button>
+          <button class="audience-tab active" id="tab-pequeno" data-audience="pequeno" role="tab" aria-selected="true" aria-controls="panel-pequeno">Tenho um pequeno negócio<small>MEIs e microempresas</small></button>
+          <button class="audience-tab" id="tab-empresa" data-audience="empresa" role="tab" aria-selected="false" aria-controls="panel-empresa">Represento uma empresa<small>Equipes e operações mais complexas</small></button>
+        </div>
+
+        <div class="audience-panel" id="panel-autonomo" role="tabpanel" aria-labelledby="tab-autonomo">
+          <div class="audience-copy">
+            <h3>Mais tempo para atender e realizar o seu trabalho</h3>
+            <p>Você atende clientes, confirma horários, responde perguntas e organiza informações sozinho? A G.IA pode reduzir essas tarefas preservando um atendimento próximo, atencioso e humanizado.</p>
+            <a class="btn btn-primary" href="https://wa.me/5519981392030?text=Ol%C3%A1%2C%20trabalho%20por%20conta%20pr%C3%B3pria%20e%20quero%20entender%20se%20uma%20tarefa%20repetitiva%20da%20minha%20rotina%20pode%20ser%20automatizada." target="_blank" rel="noopener">Analisar minha rotina</a>
+          </div>
+          <div>
+            <ul class="audience-list"><li>Confirmações de consultas e horários</li><li>Lembretes para clientes</li><li>Respostas para dúvidas frequentes</li><li>Organização de contatos e informações</li><li>Acompanhamento depois do atendimento</li></ul>
+            <div class="audience-note">Atendemos demandas individuais quando existe uma tarefa recorrente, automatizável e com benefício mensurável.</div>
+          </div>
+        </div>
+
+        <div class="audience-panel active" id="panel-pequeno" role="tabpanel" aria-labelledby="tab-pequeno">
+          <div class="audience-copy">
+            <h3>Menos trabalho manual no dia a dia do negócio</h3>
+            <p>Seu negócio cresceu, mas muitas tarefas ainda dependem de mensagens, planilhas e conferências? A G.IA organiza essas rotinas para você atender melhor e perder menos oportunidades.</p>
+            <a class="btn btn-primary" href="https://wa.me/5519981392030?text=Ol%C3%A1%2C%20tenho%20um%20pequeno%20neg%C3%B3cio%20e%20quero%20entender%20quais%20tarefas%20posso%20simplificar." target="_blank" rel="noopener">Analisar meu negócio</a>
+          </div>
+          <div>
+            <ul class="audience-list"><li>Recebimento e organização de pedidos</li><li>Respostas rápidas para clientes</li><li>Propostas, confirmações e lembretes</li><li>Registro de informações em planilhas</li><li>Acompanhamento de clientes interessados</li></ul>
+            <div class="audience-note">A solução é dimensionada conforme o volume, as ferramentas existentes e o retorno esperado.</div>
+          </div>
+        </div>
+
+        <div class="audience-panel" id="panel-empresa" role="tabpanel" aria-labelledby="tab-empresa">
+          <div class="audience-copy">
+            <h3>Integrações para operações mais complexas</h3>
+            <p>Conectamos atendimento, dados, sistemas e equipes por meio de automações e inteligência artificial planejadas para as regras e os controles da empresa.</p>
+            <a class="btn btn-primary" href="https://wa.me/5519981392030?text=Ol%C3%A1%2C%20represento%20uma%20empresa%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20e%20integra%C3%A7%C3%A3o%20de%20processos." target="_blank" rel="noopener">Conversar sobre a operação</a>
+          </div>
+          <div>
+            <ul class="audience-list"><li>Integrações por API e fluxos automatizados</li><li>Agentes de inteligência artificial</li><li>CRM, sistemas internos e regras de negócio</li><li>Monitoramento e registros de execução</li><li>Encaminhamento humano, segurança e manutenção</li></ul>
+            <div class="audience-note">A arquitetura considera volume, governança, segurança, integrações e capacidade de manutenção.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PAIN POINTS -->
   <section class="reveal">
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Sinais de que dá para automatizar</div>
-        <h2>Isso acontece na sua operação hoje?</h2>
+        <h2>Isso acontece na sua rotina ou operação?</h2>
         <p>Antes de falar de tecnologia, a G.IA olha para o processo. Estes são os sinais mais comuns de que existe uma oportunidade real.</p>
       </div>
       <div class="pain-grid">
@@ -488,7 +570,7 @@
         <h2><span class="cool">Inteligência</span> por trás.<br><span class="warm">Pessoas</span> no centro.</h2>
       </div>
       <div class="position-copy">
-        <p>A G.IA Conecta não é uma empresa que só "faz chatbot". Atuamos na interseção entre <strong>atendimento, automação, inteligência artificial, dados, processos e experiência do cliente</strong> — construindo soluções que resolvem o problema real da sua operação, do primeiro contato ao pós-venda.</p>
+        <p>A G.IA Conecta não é uma empresa que só "faz chatbot". Unimos <strong>atendimento, automação, inteligência artificial, dados, processos e experiência do cliente</strong> para construir soluções proporcionais à rotina de um profissional ou à operação de uma empresa.</p>
         <p>Cada automação nasce de um diagnóstico, não de uma ferramenta da moda. A tecnologia é o meio; o resultado para o seu negócio é o produto.</p>
         <div class="position-tags">
           <span>Atendimento</span>
@@ -508,7 +590,7 @@
       <div class="section-head">
         <div class="eyebrow">O que a G.IA entrega</div>
         <h2>Sete frentes, uma só operação inteligente</h2>
-        <p>Cada frente pode ser contratada isoladamente ou combinada em uma solução completa, de acordo com o momento da sua empresa.</p>
+        <p>Cada frente pode ser contratada isoladamente ou combinada em uma solução completa, de acordo com a necessidade e o momento de cada cliente.</p>
       </div>
       <div class="services-grid">
         <div class="service-card">
@@ -539,7 +621,7 @@
         <div class="service-card">
           <div class="service-icon">◈</div>
           <h3>Monitoramento</h3>
-          <p>Acompanhamento de integrações, workflows e sistemas para identificar falhas antes que o cliente perceba.</p>
+          <p>Acompanhamento de integrações, fluxos automatizados e sistemas para identificar falhas antes que o cliente perceba.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">❖</div>
@@ -551,7 +633,8 @@
   </section>
 
   <!-- SOLUÇÕES / EXEMPLOS -->
-  <section id="solucoes" class="alt reveal">
+  <!-- Seção preservada para reativação futura após validação de dados concretos. -->
+  <section id="solucoes" class="alt reveal future-only" aria-hidden="true">
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Soluções mais pedidas</div>
@@ -642,7 +725,7 @@
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Como trabalhamos</div>
-        <h2>Um método, não um workflow solto</h2>
+        <h2>Um método, não uma automação isolada</h2>
         <p>Uma automação só é considerada pronta quando funciona, é medida e pode ser mantida — não apenas quando o fluxo foi criado.</p>
       </div>
       <div class="timeline">
@@ -708,8 +791,8 @@
   <!-- CTA FINAL -->
   <section class="cta-final reveal">
     <div class="wrap">
-      <h2>Qual parte da sua empresa ainda depende de alguém lembrar de fazer?</h2>
-      <p>Conte onde existe demora, retrabalho ou oportunidade perdida. A gente ajuda a enxergar onde a automação faz sentido.</p>
+      <h2>Qual tarefa ainda depende de você ou da sua equipe lembrar de fazer?</h2>
+      <p>Conte onde existe demora, retrabalho ou informação perdida. A G.IA ajuda a entender se a automação faz sentido e qual é o próximo passo mais simples.</p>
       <div class="cta-buttons">
         <a class="btn btn-primary" href="https://wa.me/5519981392030" target="_blank" rel="noopener">Chamar no WhatsApp — (19) 98139-2030</a>
         <a class="btn btn-ghost" href="https://www.instagram.com/gia.conecta/" target="_blank" rel="noopener">Ver Instagram @gia.conecta</a>
@@ -798,6 +881,19 @@
     }, 6500);
   }
   simTabs.forEach(tab => tab.addEventListener('click', () => { renderScene(tab.dataset.scene); startSimulator(); }));
+
+  // Seletor de perfil
+  const audienceTabs = document.querySelectorAll('.audience-tab');
+  const audiencePanels = document.querySelectorAll('.audience-panel');
+  audienceTabs.forEach(tab => tab.addEventListener('click', () => {
+    const selected = tab.dataset.audience;
+    audienceTabs.forEach(item => {
+      const isActive = item === tab;
+      item.classList.toggle('active', isActive);
+      item.setAttribute('aria-selected', String(isActive));
+    });
+    audiencePanels.forEach(panel => panel.classList.toggle('active', panel.id === `panel-${selected}`));
+  }));
 
   // Mobile menu
   const menuToggle = document.getElementById('menuToggle');
